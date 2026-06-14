@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Meghalaa A/P Jaikumaran — Mobile Programming e-Portfolio</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#f5f0ff;color:#1a1a2e;line-height:1.65}
+:root{
+  --red:#C5192D;--red-dk:#8B0D1E;--red-lt:#fde8eb;
+  --gold:#DDA63A;--dark:#1a1a2e;--mid:#4a4a6a;
+  --light:#f5f0ff;--white:#fff;--border:#e4e0f0;
+  --shadow:0 4px 28px rgba(197,25,45,0.10);--r:14px;--rs:8px;
+}
+nav{position:sticky;top:0;z-index:999;background:var(--red-dk);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.5rem;height:58px;box-shadow:0 2px 16px rgba(0,0,0,0.22)}
+.nav-brand{color:#fff;font-weight:800;font-size:1rem;text-decoration:none;
+  display:flex;align-items:center;gap:.5rem;letter-spacing:.02em;flex-shrink:0}
+.nav-links{display:flex;gap:.15rem;list-style:none;flex-wrap:wrap}
+.nav-links a{color:rgba(255,255,255,.85);text-decoration:none;
+  padding:.3rem .75rem;border-radius:20px;font-size:.82rem;font-weight:500;
+  transition:background .2s,color .2s}
+.nav-links a:hover{background:rgba(255,255,255,.18);color:#fff}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.ham span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+@media(max-width:680px){
+  .ham{display:flex}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:58px;left:0;right:0;
+    background:var(--red-dk);padding:1rem 1.5rem 1.5rem;gap:.4rem;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:.5rem 1rem;font-size:.9rem}
+}
+#home{background:linear-gradient(135deg,var(--red-dk) 0%,var(--red) 55%,#e5243b 100%);
+  color:#fff;padding:5rem 1.5rem 4rem;text-align:center;position:relative;overflow:hidden}
+#home::before{content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")}
+.hero-badge{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);
+  border-radius:20px;padding:.3rem 1rem;font-size:.78rem;margin-bottom:1.2rem;letter-spacing:.05em}
+#home h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;margin-bottom:.4rem}
+#home .sub{font-size:1rem;opacity:.88;margin-bottom:.3rem}
+#home .meta{font-size:.85rem;opacity:.72;margin-bottom:1.8rem}
+.hero-chips{display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center;margin-bottom:2rem}
+.hchip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
+  border-radius:20px;padding:.32rem .9rem;font-size:.8rem}
+.sdg-box{display:inline-flex;align-items:center;gap:1rem;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  border-radius:var(--r);padding:1rem 1.5rem;max-width:580px;text-align:left}
+.sdg-num{background:var(--gold);color:#1a1a2e;font-weight:900;border-radius:8px;
+  padding:.4rem .8rem;font-size:1.2rem;flex-shrink:0;line-height:1.2}
+section{padding:4rem 1.5rem}
+.container{max-width:1060px;margin:0 auto}
+.sec-head{text-align:center;margin-bottom:2.5rem}
+.sec-head h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--red-dk);margin-bottom:.4rem}
+.sec-head p{color:var(--mid);font-size:.95rem;max-width:600px;margin:0 auto}
+.pill{display:inline-block;background:var(--red-lt);color:var(--red);border-radius:20px;
+  padding:.2rem .8rem;font-size:.72rem;font-weight:700;letter-spacing:.07em;
+  text-transform:uppercase;margin-bottom:.6rem}
+.card{background:var(--white);border-radius:var(--r);box-shadow:var(--shadow);
+  border:1px solid var(--border);overflow:hidden;transition:transform .22s,box-shadow .22s}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(197,25,45,.15)}
+.card-body{padding:1.3rem 1.5rem}
+.card-desc{font-size:.87rem;color:var(--mid);margin-bottom:.8rem}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
+.vid{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:#000}
+.vid iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.rq{border-left:4px solid var(--red);padding:.65rem 1rem;
+  background:var(--red-lt);border-radius:0 var(--rs) var(--rs) 0;
+  font-size:.86rem;color:var(--mid);line-height:1.55;margin-top:.8rem}
+.lab-hd{display:flex;align-items:center;gap:.75rem;padding:1rem 1.4rem .6rem;
+  border-bottom:1px solid var(--border)}
+.lbadge{display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:50%;background:var(--red);
+  color:#fff;font-weight:800;font-size:.88rem;flex-shrink:0}
+.lab-hd h3{font-size:.97rem;font-weight:700;color:var(--dark);margin-bottom:.15rem}
+.lab-hd span{font-size:.76rem;color:var(--red);font-weight:600}
+.proj-hd{display:flex;align-items:center;gap:.75rem;padding:1rem 1.4rem .65rem;
+  background:var(--red-lt);border-bottom:1px solid var(--border)}
+.plabel{background:var(--red);color:#fff;border-radius:20px;
+  padding:.18rem .75rem;font-size:.7rem;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;flex-shrink:0}
+.problem{background:#fff8e1;border:1px solid #ffe082;border-radius:var(--rs);
+  padding:.65rem 1rem;font-size:.85rem;color:#5c4000;margin-bottom:.7rem}
+.problem strong{display:block;font-size:.72rem;text-transform:uppercase;
+  letter-spacing:.06em;color:var(--gold);margin-bottom:.2rem}
+.btn{display:inline-flex;align-items:center;gap:.35rem;padding:.5rem 1rem;
+  border-radius:8px;font-size:.83rem;font-weight:600;text-decoration:none;
+  transition:all .2s;cursor:pointer;border:none}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:var(--red-dk)}
+.btn-gh{background:#24292e;color:#fff}.btn-gh:hover{background:#000}
+.brow{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:.8rem}
+#reflection{background:linear-gradient(135deg,#fff5f6,#fff)}
+.rbox{background:#fff;border-radius:var(--r);border:2px solid var(--red-lt);
+  padding:2.2rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.rbox::before{content:'❝';position:absolute;top:-.5rem;left:1rem;
+  font-size:6rem;color:var(--red);opacity:.07;line-height:1}
+.rbox p{font-size:1.02rem;color:var(--mid);line-height:1.8}
+#skills{background:var(--dark)}
+#skills .sec-head h2{color:#fff}
+#skills .sec-head p{color:rgba(255,255,255,.6)}
+.sk-grid{display:flex;flex-wrap:wrap;gap:.7rem}
+.sk{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  color:#fff;border-radius:8px;padding:.45rem .95rem;font-size:.83rem;
+  display:flex;align-items:center;gap:.45rem;transition:background .2s}
+.sk:hover{background:rgba(197,25,45,.35);border-color:var(--red)}
+.sk .dot{width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0}
+.res-item{background:#fff;border-radius:var(--rs);border:1px solid var(--border);
+  padding:.95rem 1.15rem;display:flex;align-items:flex-start;gap:.75rem}
+.res-icon{font-size:1.35rem;flex-shrink:0;margin-top:.1rem}
+.res-item h4{font-size:.9rem;font-weight:700;color:var(--dark);margin-bottom:.15rem}
+.res-item p{font-size:.81rem;color:var(--mid)}
+footer{background:var(--red-dk);color:rgba(255,255,255,.8);
+  text-align:center;padding:2rem 1rem;font-size:.87rem}
+footer strong{color:#fff}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-brand">🎓 Meghalaa</a>
+  <button class="ham" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#labs">Labs</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
+
+<section id="home">
+  <div class="container">
+    <div class="hero-badge">TK2323 / TM2213 — Mobile Programming</div>
+    <h1>Meghalaa A/P Jaikumaran</h1>
+    <p class="sub">Software Engineering 2SE2 &nbsp;·&nbsp; Universiti Kebangsaan Malaysia</p>
+    <p class="meta">Matric No: A211393 &nbsp;·&nbsp; Instructor: Nelson</p>
+    <div class="hero-chips">
+      <span class="hchip">📱 Jetpack Compose</span>
+      <span class="hchip">🗄️ Room Database</span>
+      <span class="hchip">☁️ Firebase Firestore</span>
+      <span class="hchip">🔗 Retrofit + API</span>
+      <span class="hchip">📡 Hardware Sensors</span>
+    </div>
+    <p style="font-size:.95rem;opacity:.88;max-width:600px;margin:0 auto 1.5rem">
+      I am a Software Engineering student at UKM passionate about building Android apps that make studying more structured, motivating, and accessible. Throughout this course I built <strong>Focus Buddy</strong> — a gamified study companion — progressing from a single static screen to a fully cloud-connected, sensor-aware app.
+    </p>
+    <div class="sdg-box">
+      <div class="sdg-num">SDG<br/>4</div>
+      <div>
+        <strong>Quality Education</strong><br/>
+        I chose SDG 4 because as a student, I believe technology can make effective studying accessible to everyone, everywhere. Focus Buddy directly supports this goal by lowering the barrier to consistent, self-directed learning.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="labs">
+  <div class="container">
+    <div class="sec-head">
+      <span class="pill">📚 Labs 1–5</span>
+      <h2>Laboratory Work</h2>
+      <p>Five progressive labs building from static layouts through to persistent, database-backed apps.</p>
+    </div>
+    <div class="g2">
+
+      <div class="card">
+        <div class="lab-hd">
+          <div class="lbadge">1</div>
+          <div><h3>Basic Layout (UI)</h3><span>Row · Column · Box · Image · Text</span></div>
+        </div>
+        <div class="vid">
+          <iframe src="https://www.youtube.com/embed/71zJFyNAFKs" allowfullscreen loading="lazy" title="Lab 1 Demo"></iframe>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Building a static screen using Row, Column, Box, Image, and Text composables in Jetpack Compose to establish a structured UI foundation aligned with SDG 4.</p>
+          <div class="rq">Lab 1 taught me how Compose uses Row and Column to arrange UI. I reverse-engineered a reference app which is Jungle for SDG 4 by recreating its layout with my own color scheme. At first the nesting of composables was confusing, but once I understood the tree structure it clicked.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="lab-hd">
+          <div class="lbadge">2</div>
+          <div><h3>Interaction</h3><span>TextField · Button · mutableStateOf · remember</span></div>
+        </div>
+        <div class="vid">
+          <iframe src="https://www.youtube.com/embed/wQCrd40BRy4" allowfullscreen loading="lazy" title="Lab 2 Demo"></iframe>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Adding TextField, Button, and state management to make the UI respond to user input and persist values across recompositions.</p>
+          <div class="rq">Lab 2 introduced me to state management in Compose and I learned that remember holds state during recomposition and mutableStateOf triggers a redraw when the value changes. I added interactive name entry and a button to my SDG app. The hardest part was understanding why state needs to be in the composable, not outside it.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="lab-hd">
+          <div class="lbadge">3</div>
+          <div><h3>Material Design</h3><span>Theme · ElevatedCard · animateContentSize()</span></div>
+        </div>
+        <div class="vid">
+          <iframe src="https://www.youtube.com/embed/PfaPvTkDPg0" allowfullscreen loading="lazy" title="Lab 3 Demo"></iframe>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Applying a custom Material 3 theme generated from Material Theme Builder, using Card composables and content-size animations for a polished look.</p>
+          <div class="rq">Lab 3 showed me how professional apps get their consistent look with a central color scheme defined in Color.kt that flows through every composable automatically. I used Material Theme Builder to generate a blue palette matching SDG 4 and wrapped my content in ElevatedCards. Adding expand/collapse animation with animateContentSize() made the UI feel noticeably more polished.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="lab-hd">
+          <div class="lbadge">4</div>
+          <div><h3>Navigation &amp; ViewModel</h3><span>NavController · Routes · Shared State</span></div>
+        </div>
+        <div class="vid">
+          <iframe src="https://www.youtube.com/embed/RoSZVsJegRE" allowfullscreen loading="lazy" title="Lab 4 Demo"></iframe>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Building a multi-screen app with NavController, enum-based routes, and a shared ViewModel so state persists across all screens.</p>
+          <div class="rq">Lab 4 transformed my single-screen app into a real multi-page experience. I defined routes in an enum and used NavController to navigate between them. The ViewModel was the key insight as it lives outside any one screen, so data like the user's name doesn't reset when you navigate away. This is the foundation that Focus Buddy is built on.</div>
+        </div>
+      </div>
+
+      <div class="card" style="grid-column:1/-1;max-width:530px;margin:0 auto">
+        <div class="lab-hd">
+          <div class="lbadge">5</div>
+          <div><h3>Room Database</h3><span>Entity · DAO · StateFlow · MVVM</span></div>
+        </div>
+        <div class="vid">
+          <iframe src="https://www.youtube.com/embed/annvDe9-8hA" allowfullscreen loading="lazy" title="Lab 5 Demo"></iframe>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Adding persistent local storage using Room — Entity, DAO, Database, and StateFlow — to complete the full MVVM architecture with a live-updating UI.</p>
+          <div class="rq">Lab 5 completed the MVVM architecture by adding a real database layer. I learned that Room sits between the ViewModel and the actual SQLite file — the DAO defines what operations are possible, and Room generates the SQL automatically. The biggest concept shift was understanding Flow: instead of reading data once, the DAO returns a live stream that updates the UI automatically whenever the database changes.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="projects" style="background:#fff">
+  <div class="container">
+    <div class="sec-head">
+      <span class="pill">🚀 Projects</span>
+      <h2>Projects</h2>
+      <p>Two Android apps applying everything learned across Labs 1–5, built around SDG 4: Quality Education.</p>
+    </div>
+    <div class="g2">
+
+      <div class="card">
+        <div class="proj-hd">
+          <span class="plabel">Project 1</span>
+          <div>
+            <div style="font-size:1rem;font-weight:700;color:var(--dark)">Focus Buddy — Core</div>
+            <div style="font-size:.76rem;color:var(--red);font-weight:600">Lab 4 + Working Features</div>
+          </div>
+        </div>
+        <div class="vid">
+          <iframe src="https://www.youtube.com/embed/jwka6VLbzPI" allowfullscreen loading="lazy" title="Project 1 VSR"></iframe>
+        </div>
+        <div class="card-body">
+          <div class="problem">
+            <strong>Problem Statement</strong>
+            Many students struggle to build consistent study habits due to a lack of motivation and structure. Focus Buddy gamifies the study experience through a virtual pet system and XP rewards to keep learners engaged.
+          </div>
+          <p class="card-desc"><strong>Features:</strong> Home &amp; Dashboard screens, study scheduling, subject quizzes, flashcards, Pomodoro timer, and a pet growth system across 7 screens powered by NavController and a shared ViewModel.</p>
+          <div class="rq">Project 1 was my first time building a complete multi-screen Android app from scratch. Wiring the ViewModel to every screen taught me how a single source of truth prevents data inconsistency. The gamification mechanic (XP → pet level) gave the app a clear reason to exist, which made design decisions much easier.</div>
+          <div class="brow">
+            <a href="https://www.youtube.com/watch?v=jwka6VLbzPI" class="btn btn-red" target="_blank" rel="noopener">▶ Watch VSR</a>
+            <a href="https://github.com/meghalaa17/FOCUSBUDDY-P1" class="btn btn-gh" target="_blank" rel="noopener">🐙 View on GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="proj-hd">
+          <span class="plabel">Project 2</span>
+          <div>
+            <div style="font-size:1rem;font-weight:700;color:var(--dark)">Focus Buddy — Full Stack</div>
+            <div style="font-size:.76rem;color:var(--red);font-weight:600">Lab 5 + API + Sensors + Cloud</div>
+          </div>
+        </div>
+        <div class="vid">
+          <iframe src="https://www.youtube.com/embed/3UZ9ozr2izE" allowfullscreen loading="lazy" title="Project 2 VSR"></iframe>
+        </div>
+        <div class="card-body">
+          <div class="problem">
+            <strong>Problem Statement</strong>
+            Students need not just structure, but also environmental feedback, live motivation, and community accountability to sustain studying. Focus Buddy v2 adds real-time cloud sync, hardware sensors, and a live API to address these gaps.
+          </div>
+          <p class="card-desc"><strong>New in v2:</strong> Room Database for offline persistence, Firebase Firestore for shared community goals, ZenQuotes API via Retrofit for daily motivation, accelerometer shake-to-pause, and light sensor study environment feedback.</p>
+          <div class="rq">Project 2 was where everything came together — Room kept data alive across sessions, Retrofit fetched live quotes, Firebase shared goals across devices, and the accelerometer responded to physical movement. Integrating hardware sensors was the most exciting part; it made the app feel physically aware rather than just a digital checklist.</div>
+          <div class="brow">
+            <a href="https://youtu.be/3UZ9ozr2izE" class="btn btn-red" target="_blank" rel="noopener">▶ Watch VSR</a>
+            <a href="https://github.com/meghalaa17/FOCUSBUDDY-P2" class="btn btn-gh" target="_blank" rel="noopener">🐙 View on GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="reflection">
+  <div class="container">
+    <div class="sec-head">
+      <span class="pill">💭 Reflection</span>
+      <h2>Learning Journey</h2>
+      <p>From static layouts in Lab 1 to a cloud-connected, sensor-aware app in Project 2.</p>
+    </div>
+    <div class="rbox">
+      <p>Starting from Lab 1's static layouts, each lab progressively added a new architectural layer — interactivity, theming, navigation, and finally persistence — until by Project 2 I had built a fully connected, hardware-aware app. The biggest challenge was internalizing the separation of concerns: screens should only call ViewModel functions, never touch Room or Firebase directly. Project 2 was where everything came together — Room kept data alive, Retrofit fetched live quotes, Firebase shared goals across devices, and the accelerometer responded to physical movement. I now understand why professional apps are built in layers: each layer can be changed independently without breaking the rest.</p>
+    </div>
+    <div style="margin-top:2.2rem">
+      <h3 style="text-align:center;color:var(--red-dk);font-weight:800;margin-bottom:1.4rem">My Growth Timeline</h3>
+      <div class="g3">
+        <div style="background:#fff;border-radius:var(--r);padding:1.2rem;border:1px solid var(--border);text-align:center">
+          <div style="font-size:2rem;margin-bottom:.5rem">🧱</div>
+          <h4 style="color:var(--red-dk);margin-bottom:.3rem">Labs 1–3</h4>
+          <p style="font-size:.84rem;color:var(--mid)">Mastered UI fundamentals — layout, state, and Material theming in Jetpack Compose.</p>
+        </div>
+        <div style="background:#fff;border-radius:var(--r);padding:1.2rem;border:1px solid var(--border);text-align:center">
+          <div style="font-size:2rem;margin-bottom:.5rem">🗺️</div>
+          <h4 style="color:var(--red-dk);margin-bottom:.3rem">Lab 4 + Project 1</h4>
+          <p style="font-size:.84rem;color:var(--mid)">Built a real multi-screen app with navigation, shared ViewModel, and gamification.</p>
+        </div>
+        <div style="background:#fff;border-radius:var(--r);padding:1.2rem;border:1px solid var(--border);text-align:center">
+          <div style="font-size:2rem;margin-bottom:.5rem">🚀</div>
+          <h4 style="color:var(--red-dk);margin-bottom:.3rem">Lab 5 + Project 2</h4>
+          <p style="font-size:.84rem;color:var(--mid)">Added Room, Retrofit, Firebase, and hardware sensors to complete a production-ready architecture.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="sec-head">
+      <span class="pill" style="background:rgba(255,255,255,.12);color:#fff">🛠️ Stack</span>
+      <h2>Skills &amp; Tech Stack</h2>
+      <p>Technologies learned and applied throughout this course.</p>
+    </div>
+    <div class="sk-grid">
+      <div class="sk"><span class="dot"></span>Kotlin</div>
+      <div class="sk"><span class="dot"></span>Jetpack Compose</div>
+      <div class="sk"><span class="dot"></span>Material Design 3</div>
+      <div class="sk"><span class="dot"></span>Navigation Compose</div>
+      <div class="sk"><span class="dot"></span>ViewModel &amp; State</div>
+      <div class="sk"><span class="dot"></span>Room Database</div>
+      <div class="sk"><span class="dot"></span>DAO &amp; Entity Design</div>
+      <div class="sk"><span class="dot"></span>StateFlow / Flow</div>
+      <div class="sk"><span class="dot"></span>Coroutines</div>
+      <div class="sk"><span class="dot"></span>Retrofit 2</div>
+      <div class="sk"><span class="dot"></span>Gson Converter</div>
+      <div class="sk"><span class="dot"></span>REST API Integration</div>
+      <div class="sk"><span class="dot"></span>Firebase Firestore</div>
+      <div class="sk"><span class="dot"></span>Real-time Listeners</div>
+      <div class="sk"><span class="dot"></span>Accelerometer Sensor</div>
+      <div class="sk"><span class="dot"></span>Light Sensor</div>
+      <div class="sk"><span class="dot"></span>MVVM Architecture</div>
+      <div class="sk"><span class="dot"></span>KSP</div>
+      <div class="sk"><span class="dot"></span>Android Studio</div>
+      <div class="sk"><span class="dot"></span>Git &amp; GitHub</div>
+    </div>
+  </div>
+</section>
+
+<section id="resources" style="background:var(--light)">
+  <div class="container">
+    <div class="sec-head">
+      <span class="pill">📎 Resources</span>
+      <h2>APIs, Libraries &amp; Acknowledgements</h2>
+      <p>External tools and references used across the project.</p>
+    </div>
+    <div class="g2">
+      <div class="res-item"><div class="res-icon">💬</div><div><h4>ZenQuotes API</h4><p>Free motivational quotes API used for the Daily Motivation screen. Endpoint: <code>zenquotes.io/api/random</code> — no API key required.</p></div></div>
+      <div class="res-item"><div class="res-icon">☁️</div><div><h4>Firebase Firestore</h4><p>Google's cloud NoSQL database used for the real-time Community Goals board, allowing all users to share and view study goals live.</p></div></div>
+      <div class="res-item"><div class="res-icon">🔗</div><div><h4>Retrofit 2 + Gson</h4><p>Square's HTTP client library with Gson converter for parsing JSON responses from the ZenQuotes API into Kotlin data classes.</p></div></div>
+      <div class="res-item"><div class="res-icon">🗄️</div><div><h4>Room Persistence Library</h4><p>Android Jetpack's SQLite abstraction used for storing study slots, flashcards, and session history with auto-updating StateFlow.</p></div></div>
+      <div class="res-item"><div class="res-icon">📐</div><div><h4>Material Theme Builder</h4><p>Google's online tool used to generate a custom Material 3 colour scheme for Lab 3 and the full Focus Buddy app.</p></div></div>
+      <div class="res-item"><div class="res-icon">🤖</div><div><h4>AI Assistance (Claude by Anthropic)</h4><p>AI assistance was used to support debugging, generate boilerplate patterns, and help produce this e-Portfolio. All code was reviewed, understood, and adapted by the student.</p></div></div>
+      <div class="res-item"><div class="res-icon">📚</div><div><h4>Android Developers Documentation</h4><p>Official Google documentation for Jetpack Compose, Navigation, Room, Sensors, and Firebase — the primary reference throughout development.</p></div></div>
+      <div class="res-item"><div class="res-icon">🎓</div><div><h4>Instructor: Nelson</h4><p>Course guidance and lab materials provided by Instructor Nelson, Faculty of Information Science and Technology, Universiti Kebangsaan Malaysia.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Meghalaa A/P Jaikumaran</strong> &nbsp;·&nbsp; Matric No: A211393 &nbsp;·&nbsp; Software Engineering 2SE2</p>
+  <p style="margin-top:.4rem">Universiti Kebangsaan Malaysia &nbsp;·&nbsp; TK2323 / TM2213 Mobile Programming &nbsp;·&nbsp; 2026</p>
+  <p style="margin-top:.6rem;font-size:.78rem;opacity:.55">SDG 4: Quality Education 🎓 &nbsp;·&nbsp; Built with ❤️ using Jetpack Compose</p>
+</footer>
+
+<script>
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open'));
+  });
+</script>
+</body>
+</html>
